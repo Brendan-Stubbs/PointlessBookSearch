@@ -9,8 +9,9 @@ class Searchbar extends React.Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
+    const searchType = this.props.searchType;
 
-    this.props.onSearchSubmit(this.state.title_term);
+    this.props.onSearchSubmit(this.state.title_term, searchType);
   };
 
   render() {
@@ -21,8 +22,8 @@ class Searchbar extends React.Component {
             <div className="ui left icon input">
               <input
                 type="text"
-                placeholder="Search by title..."
-                className="focused"
+                placeholder={"Search by " + this.props.searchType}
+                className="search-book-input"
                 value={this.state.title_term}
                 onChange={this.onInputChange}
               />

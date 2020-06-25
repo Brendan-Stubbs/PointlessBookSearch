@@ -1,20 +1,20 @@
 import React from "react";
-import Searchbar from "./Searchbar";
 import Header from "./Header";
 import BookList from "./BookList";
 import BookDetail from "./BookDetail";
+import MultipleSearch from "./MultipleSearch";
 import google_books from "./apis/google_books";
 
 class App extends React.Component {
   state = { books: [], selectedBook: null };
 
   componentDidMount = () => {
-    this.onSearchSubmit("Goosebumps");
+    this.onSearchSubmit("Harry Potter", "title");
   };
 
-  onSearchSubmit = async (title_term) => {
+  onSearchSubmit = async (title_term, searchType) => {
     const response = await google_books.get("v1/volumes", {
-      params: { q: title_term },
+      params: { q: searchType + ":" + title_term },
     });
 
     this.setState({
@@ -31,7 +31,7 @@ class App extends React.Component {
     return (
       <div className="main-app-container ui container">
         <Header />
-        <Searchbar onSearchSubmit={this.onSearchSubmit} />
+        <MultipleSearch onSearchSubmit={this.onSearchSubmit} />
         <div className="ui grid">
           <div className="ui row">
             <div className="ten wide column">
