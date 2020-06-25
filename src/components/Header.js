@@ -2,8 +2,7 @@ import React from "react";
 
 const book_img =
   "https://www.adazing.com/wp-content/uploads/2019/02/open-book-clipart-03.png";
-const book_img2 =
-  "https://lh3.googleusercontent.com/proxy/5xBaZGJpBMGfCymMmrbvk2ug9B_eGNtGHmV71Gg4zyprwVTYSIv50uKGPk2heNyGveFVX4MhoyHutCOqZhTKNoYW4m8HITo";
+const book_img2 = "https://webstockreview.net/images/clipart-books-teal-14.png";
 class Header extends React.Component {
   render() {
     return (

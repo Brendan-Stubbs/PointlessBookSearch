@@ -9,7 +9,7 @@ class App extends React.Component {
   state = { books: [], selectedBook: null };
 
   componentDidMount = () => {
-    this.onSearchSubmit("Harry Potter", "title");
+    this.onSearchSubmit("mastering react", "intitle");
   };
 
   onSearchSubmit = async (title_term, searchType) => {
@@ -17,8 +17,10 @@ class App extends React.Component {
       params: { q: searchType + ":" + title_term },
     });
 
+    let results_len =
+      response.data.items.length >= 5 ? 5 : response.data.items.length;
     this.setState({
-      books: response.data.items.slice(0, 5),
+      books: response.data.items.slice(0, results_len),
       selectedBook: response.data.items[0],
     });
   };

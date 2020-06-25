@@ -21,7 +21,7 @@ class MultipleSearch extends React.Component {
           <div className="four wide column">
             <Searchbar
               onSearchSubmit={this.props.onSearchSubmit}
-              searchType="genre"
+              searchType="subject"
             />
           </div>
         </div>

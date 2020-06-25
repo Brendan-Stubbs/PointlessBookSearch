@@ -1,4 +1,17 @@
 import React from "react";
+// import { debounce } from "lodash";
+
+const debounce = (fn, delay) => {
+  let timeoutID;
+  return function (...args) {
+    if (timeoutID) {
+      clearTimeout(timeoutID);
+    }
+    timeoutID = setTimeout(() => {
+      fn(...args);
+    }, delay);
+  };
+};
 
 class Searchbar extends React.Component {
   state = { title_term: "" };
@@ -7,11 +20,21 @@ class Searchbar extends React.Component {
     this.setState({ title_term: event.target.value });
   };
 
+  onKeyUp = debounce(() => {
+    const searchType = this.getSearchType(this.props.searchType);
+    this.props.onSearchSubmit(this.state.title_term, searchType);
+  }, 1000);
+
   onFormSubmit = (event) => {
     event.preventDefault();
-    const searchType = this.props.searchType;
-
+    const searchType = this.getSearchType(this.props.searchType);
     this.props.onSearchSubmit(this.state.title_term, searchType);
+  };
+
+  getSearchType = function (searchType) {
+    if (searchType === "title") return "intitle";
+    else if (searchType === "author") return "inauthor";
+    else return this.props.searchType;
   };
 
   render() {
@@ -26,6 +49,7 @@ class Searchbar extends React.Component {
                 className="search-book-input"
                 value={this.state.title_term}
                 onChange={this.onInputChange}
+                onKeyUp={this.onKeyUp}
               />
               <i className="search icon"></i>
             </div>
